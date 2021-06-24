@@ -25,7 +25,7 @@ interface Todo {
 
 const TodoData = () => {
   if (typeof window !== "undefined") {
-    return JSON.parse(localStorage.getItem("todos")) || [];
+    return JSON.parse(window.localStorage.getItem("todos")) || [];
   }
 };
 
