@@ -17,8 +17,10 @@ export const AddTodo = styled.form`
     background-color: white;
   }
   button {
-    border: 1px solid dodgerblue;
-    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 1px solid dodgerblue;
+    padding: 10px;
     background-color: white;
     &:hover {
       color: white;
@@ -57,7 +59,13 @@ export const TodoMain = styled.div`
 
 export const TodoChildDesc = styled.div`
     height: 272px;
-    /* border: 1px solid black; */
+    textarea{
+      font-size: large;
+      width: 100%;
+      border: none;
+      height: 100%;
+    }
+
 `
 export const  TodoButton = styled.div`
 display: flex;
