@@ -25,7 +25,7 @@ export const TodoAdd = styled.form`
     border: none;
     border-radius: 5px;
     padding: 10px;
-    background-color: #d1d1d1;
+    background-color: #dddddd;
     &:active {
       color: white;
       background-color: dodgerblue;
