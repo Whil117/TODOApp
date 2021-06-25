@@ -51,7 +51,7 @@ const Todo: FC = () => {
 
   const handleSubmit = (evt: { preventDefault: () => void }) => {
     evt.preventDefault();
-    if (title === "" && desc === "") {
+    if (title === "" || desc === "") {
       setValidTodo(true)
     } else {
       setValidTodo(false)
