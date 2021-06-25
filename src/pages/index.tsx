@@ -1,16 +1,44 @@
-import styled from '@emotion/styled'
-import React from 'react'
-import Todo from '../components/TodoApp/Todo'
+import styled from "@emotion/styled";
+import React, { useEffect, useState } from "react";
+import Todo from "../components/TodoApp/Todo";
+import ThemeContext, { Themes } from "../assets/ThemeContext";
 
-const MainApp = styled.main`
-  font-family: 'Source Sans Pro', sans-serif;
-`
-
-const  Home = ()=> {
-  return (
-    <MainApp>
-      <Todo/>
-    </MainApp>
-  )
+interface Theme {
+  theme: string;
 }
-export default Home
+
+const MainApp = styled.main<Theme>`
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: ${({ theme }) => (theme === "light" ? "white" : "#2f3136")};
+  height: 100vh;
+  h1 {
+    color: ${({ theme }) => (theme === "light" ? "#2f3136" : "white")};
+    margin: 0;
+  }
+`;
+
+const Home = () => {
+  const [theme, setTheme] = useState(Themes.light);
+  
+  const handleTodoTheme = (nameTheme: string) => {
+    setTheme(nameTheme);
+  };
+
+  useEffect(() => {
+    const themeLocal = localStorage.getItem("themew") || "light";
+    setTheme(themeLocal);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("themew", theme);
+  }, [theme]);
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <MainApp theme={theme}>
+        <Todo handleTodoTheme={handleTodoTheme} theme={theme} />
+      </MainApp>
+    </ThemeContext.Provider>
+  );
+};
+export default Home;

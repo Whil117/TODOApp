@@ -3,50 +3,56 @@ import styled from "@emotion/styled";
 interface Check {
   check: Boolean;
 }
+interface Theme {
+  theme:string
+}
 
-export const TodoAdd = styled.form`
+export const TodoAdd = styled.form<Theme>`
   display: flex;
   flex-direction: column;
   width: 250px;
   height: 350px;
   justify-content: space-between;
-  background: #ffffff;
   box-shadow: 2px 2px 15px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 20px;
   margin: 10px;
+  background: ${({theme})=>theme==='light'? '#ffffff' : '#18191c'};
   input {
     border-radius: 5px;
-    border: 1px solid black;
-    padding: 5px;
-    background-color: white;
+    padding: 10px;
+    margin: 5px;
+    color:${({theme})=>theme==='light' ? 'black' : 'white'};
+    border: 1px solid ${({theme})=>theme==='light'? '#18191c' : 'white'};
+    background-color: ${({theme})=>theme==='light'? 'white' : '#40444b'};
   }
   button {
     border: none;
     border-radius: 5px;
     padding: 10px;
-    background-color: #dddddd;
-    &:active {
-      color: white;
-      background-color: dodgerblue;
-    }
+    margin: 5px;
+    color:${({theme})=>theme==='light' ? '#18191c' : 'white'};
+    background-color: ${({theme})=>theme==='light'? '#dddddd' : 'dodgerblue'};
   }
   textarea {
     border-radius: 5px;
-    border: 1px solid black;
-    padding: 5px;
+    padding: 10px;
     height: 260px;
+    margin: 5px;
+    color:${({theme})=>theme==='light' ? '#18191c' : 'white'};
+    border: 1px solid ${({theme})=>theme==='light'? '#18191c' : 'white'};
+    background-color: ${({theme})=>theme==='light'? 'white' : '#40444b'};
   }
 `;
 
-export const TodoCard = styled.div`
+export const TodoCard = styled.div<Theme>`
   display: flex;
   flex-direction: column;
   width: 250px;
   height: auto;
   justify-content: space-between;
   align-items: stretch;
-  background: #ffffff;
+  /* background: #ffffff; */
   box-shadow: 2px 2px 15px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 20px;
@@ -55,6 +61,8 @@ export const TodoCard = styled.div`
     margin: 0;
     padding: 0;
   }
+  color:${({theme})=>theme==='light' ? '#18191c' : 'white'};
+  background: ${({theme})=>theme==='light'? '#ffffff' : '#18191c'};
 `;
 
 export const TodoMain = styled.div`
@@ -71,7 +79,6 @@ export const TodoDescDiv = styled.div`
     width: 100%;
     border: none;
     height: 100%;
-    background-color: white;
   }
 `;
 export const TodoDeleteButton = styled.button`
