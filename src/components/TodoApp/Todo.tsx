@@ -15,7 +15,6 @@ import styled from "@emotion/styled";
 const Warning = styled.h2`
       color: red;
 `
-
 interface Todo {
   id: number;
   title: string;
@@ -25,17 +24,18 @@ interface Todo {
 
 const TodoData = () => {
   if (typeof window !== "undefined") {
-    return JSON.parse(window.localStorage.getItem("todos")) || [];
+    return JSON.parse(localStorage.getItem("todos") || '[]') ;
   }
 };
 
 const Todo: FC = () => {
+
+  const [validTodo, setValidTodo] = useState(false);
   const [todos, dispatch] = useReducer(todoReducer, [], TodoData);
-  const [{ title, desc }, handleChange, reset] = useForm({
+  const [{title,desc}, handleChange, reset] = useForm({
     title: "",
     desc: "",
   });
-  const [validTodo, setValidTodo] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -48,6 +48,7 @@ const Todo: FC = () => {
     };
     dispatch(action);
   };
+
   const handleSubmit = (evt: { preventDefault: () => void }) => {
     evt.preventDefault();
     if (title === "" && desc === "") {

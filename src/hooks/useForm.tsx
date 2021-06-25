@@ -1,22 +1,30 @@
-import  { useState } from "react";
-interface Form {
-  title:string
-  desc:string
+import { FormEvent, useState } from "react";
+
+interface FormValue {
+  title: string;
+  desc: string;
 }
-const useForm = (init = {}) => {
+const initValue = {
+  title: "",
+  desc: "",
+};
+
+const useForm = (
+  init = initValue
+): [value: FormValue, handleChange: (evt: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void , reset: () => void] => {
   const [value, setValue] = useState(init);
 
   const reset = () => {
     setValue(init);
   };
 
-  const handleChange = ({ target }) => {
+  const handleChange = (evt: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValue({
       ...value,
-      [target.name]: target.value,
+      [evt.currentTarget.name]: evt.currentTarget.value,
     });
   };
   return [value, handleChange, reset];
 };
-
+//, , reset
 export default useForm;
