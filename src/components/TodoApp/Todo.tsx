@@ -16,6 +16,9 @@ const TodoNav = styled.nav`
     justify-content: space-around;
     padding: 30px;
 `
+const TodoDivs = styled.div`
+  background: ${({theme})=>theme==='light'? '#ffffff' : '#18191c'};
+`
 interface Todo {
   id: number;
   title: string;
@@ -83,7 +86,7 @@ const Todo: FC<TodoComp> = ({ handleTodoTheme, theme }) => {
   };
 
   return (
-    <div>
+    <TodoDivs theme={theme}>
       <TodoNav>
         <h1>TodoApp ({todos?.length})</h1>
         <ThemeButton theme={theme} handleTodoTheme={handleTodoTheme} />
@@ -107,7 +110,7 @@ const Todo: FC<TodoComp> = ({ handleTodoTheme, theme }) => {
             ))
           : false}
       </TodoMain>
-    </div>
+    </TodoDivs>
   );
 };
 

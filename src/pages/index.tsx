@@ -9,7 +9,7 @@ interface Theme {
 
 const MainApp = styled.main<Theme>`
   font-family: "Source Sans Pro", sans-serif;
-  background-color: ${({ theme }) => (theme === "light" ? "white" : "#2f3136")};
+  background: ${({theme})=>theme==='light'? '#ffffff' : '#18191c'};
   height: 100vh;
   h1 {
     color: ${({ theme }) => (theme === "light" ? "#2f3136" : "white")};
