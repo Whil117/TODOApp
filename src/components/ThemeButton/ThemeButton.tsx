@@ -1,12 +1,13 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
+import ThemeContext from "../../assets/ThemeContext";
 import { DivLabels, LabelsMode } from "../../styles/ThemeButtons/Buttons";
 
 interface Props {
-  theme: string;
   handleTodoTheme: any;
 }
 
-const ThemeButton: FC<Props> = ({ theme, handleTodoTheme }) => {
+const ThemeButton: FC<Props> = ({ handleTodoTheme }) => {
+  const theme = useContext(ThemeContext)
   return (
     <DivLabels theme={theme === "light"}>
       <LabelsMode theme={theme === "light"} htmlFor="light">

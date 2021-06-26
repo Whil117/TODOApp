@@ -21,7 +21,7 @@ const Home = () => {
   const [theme, setTheme] = useState(Themes.light);
   
   const handleTodoTheme = (nameTheme: string) => {
-    setTheme(nameTheme);
+     setTheme(nameTheme);
   };
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <ThemeContext.Provider value={theme}>
       <MainApp theme={theme}>
-        <Todo handleTodoTheme={handleTodoTheme} theme={theme} />
+        <Todo handleTodoTheme={handleTodoTheme}  />
       </MainApp>
     </ThemeContext.Provider>
   );

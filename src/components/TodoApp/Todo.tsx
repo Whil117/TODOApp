@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, FC, useState } from "react";
+import React, { useEffect, useReducer, FC, useState, useContext } from "react";
 import { todoReducer } from "./TodoReducer";
 import useForm from "../../hooks/useForm";
 import { TodoMain } from "../../styles/TodoApp/TodoReduce";
@@ -6,19 +6,20 @@ import TodoAddForm from "../TodoAddForm";
 import TodoCardComponent from "../TodoApp/TodoCard";
 import ThemeButton from "../ThemeButton/ThemeButton";
 import styled from "@emotion/styled";
+import ThemeContext from "../../assets/ThemeContext";
 
 const TodoWarning = styled.h2`
   color: red;
 `;
 const TodoNav = styled.nav`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 30px;
-`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+`;
 const TodoDivs = styled.div`
-  background: ${({theme})=>theme==='light'? '#ffffff' : '#18191c'};
-`
+  background: ${({ theme }) => (theme === "light" ? "#ffffff" : "#18191c")};
+`;
 interface Todo {
   id: number;
   title: string;
@@ -27,7 +28,6 @@ interface Todo {
 }
 interface TodoComp {
   handleTodoTheme: any;
-  theme: string;
 }
 
 const todoLocal = () => {
@@ -36,23 +36,25 @@ const todoLocal = () => {
   }
 };
 
-const Todo: FC<TodoComp> = ({ handleTodoTheme, theme }) => {
+const Todo: FC<TodoComp> = ({ handleTodoTheme }) => {
   const [todoValid, setTodoValid] = useState(false);
   const [todos, dispatch] = useReducer(todoReducer, [], todoLocal);
   const [{ title, desc }, handleTodoChange, handleTodoReset] = useForm({
     title: "",
     desc: "",
   });
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   const handleTodoCheck = (id: number) => {
-    dispatch({
+    const action = {
       type: "check",
       payload: id,
-    });
+    };
+    dispatch(action);
   };
   const handleTodoDelete = (id: number) => {
     const action = {
@@ -89,7 +91,7 @@ const Todo: FC<TodoComp> = ({ handleTodoTheme, theme }) => {
     <TodoDivs theme={theme}>
       <TodoNav>
         <h1>TodoApp ({todos?.length})</h1>
-        <ThemeButton theme={theme} handleTodoTheme={handleTodoTheme} />
+        <ThemeButton handleTodoTheme={handleTodoTheme} />
       </TodoNav>
       {todoValid && <TodoWarning>Debes llenar el Formulario</TodoWarning>}
       <TodoMain>
