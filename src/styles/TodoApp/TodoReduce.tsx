@@ -52,7 +52,6 @@ export const TodoCard = styled.div<Theme>`
   height: auto;
   justify-content: space-between;
   align-items: stretch;
-  /* background: #ffffff; */
   box-shadow: 2px 2px 15px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 20px;

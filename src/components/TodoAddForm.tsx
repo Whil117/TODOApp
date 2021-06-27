@@ -1,16 +1,20 @@
-import React, { ChangeEventHandler, FormEventHandler,useContext } from "react";
+import React, { ChangeEventHandler, FormEventHandler, useContext } from "react";
 import ThemeContext from "../assets/ThemeContext";
 import { TodoAdd } from "../styles/TodoApp/TodoReduce";
-
 interface Props {
-    handleTodoSubmit:FormEventHandler<HTMLFormElement>
-    handleTodoChange:ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
-    title:string
-    desc:string
+  handleTodoSubmit: FormEventHandler<HTMLFormElement>;
+  handleTodoChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  title: string;
+  desc: string;
 }
 
-const TodoAddForm:React.FC<Props> = ({ handleTodoSubmit, handleTodoChange, title, desc }) => {
-    const theme = useContext(ThemeContext)
+const TodoAddForm: React.FC<Props> = ({
+  handleTodoSubmit,
+  handleTodoChange,
+  title,
+  desc,
+}) => {
+  const theme = useContext(ThemeContext);
 
   return (
     <TodoAdd onSubmit={handleTodoSubmit} theme={theme}>

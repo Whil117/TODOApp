@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
-import Todo from "../components/TodoApp/Todo";
+import React, { useEffect, useState,FC } from "react";
 import ThemeContext, { Themes } from "../assets/ThemeContext";
-
+import Todo from "../components/TodoApp/Todo";
+import styled from "@emotion/styled";
 interface Theme {
   theme: string;
 }
@@ -17,7 +16,7 @@ const MainApp = styled.main<Theme>`
   }
 `;
 
-const Home = () => {
+const Home:FC = () => {
   const [theme, setTheme] = useState(Themes.light);
   
   const handleTodoTheme = (nameTheme: string) => {

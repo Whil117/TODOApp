@@ -1,13 +1,21 @@
 import React, { useEffect, useReducer, FC, useState, useContext } from "react";
-import { todoReducer } from "./TodoReducer";
 import useForm from "../../hooks/useForm";
+import { todoReducer } from "./TodoReducer";
 import { TodoMain } from "../../styles/TodoApp/TodoReduce";
 import TodoAddForm from "../TodoAddForm";
-import TodoCardComponent from "../TodoApp/TodoCard";
+import TodoCardComponent from "./TodoCardComponent";
 import ThemeButton from "../ThemeButton/ThemeButton";
-import styled from "@emotion/styled";
 import ThemeContext from "../../assets/ThemeContext";
-
+import styled from "@emotion/styled";
+interface Todo {
+  id: number;
+  title: string;
+  desc: string;
+  done: boolean;
+}
+interface TodoComp {
+  handleTodoTheme: any;
+}
 const TodoWarning = styled.h2`
   color: red;
 `;
@@ -20,15 +28,6 @@ const TodoNav = styled.nav`
 const TodoDivs = styled.div`
   background: ${({ theme }) => (theme === "light" ? "#ffffff" : "#18191c")};
 `;
-interface Todo {
-  id: number;
-  title: string;
-  desc: string;
-  done: boolean;
-}
-interface TodoComp {
-  handleTodoTheme: any;
-}
 
 const todoLocal = () => {
   if (typeof window !== "undefined") {
@@ -71,6 +70,7 @@ const Todo: FC<TodoComp> = ({ handleTodoTheme }) => {
       setTodoValid(true);
     } else {
       setTodoValid(false);
+
       const newTodo = {
         id: new Date().getTime(),
         title: title,
@@ -101,16 +101,14 @@ const Todo: FC<TodoComp> = ({ handleTodoTheme }) => {
           title={title}
           desc={desc}
         />
-        {todos
-          ? todos.map((todo: Todo) => (
-              <TodoCardComponent
-                key={todo.id}
-                todo={todo}
-                handleTodoCheck={handleTodoCheck}
-                handleTodoDelete={handleTodoDelete}
-              />
-            ))
-          : false}
+        {todos?.map((todo: Todo) => (
+          <TodoCardComponent
+            key={todo.id}
+            todo={todo}
+            handleTodoCheck={handleTodoCheck}
+            handleTodoDelete={handleTodoDelete}
+          />
+        ))}
       </TodoMain>
     </TodoDivs>
   );

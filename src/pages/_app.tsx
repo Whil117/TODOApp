@@ -1,23 +1,33 @@
-import type { AppProps } from "next/app";
-import { Global, css } from '@emotion/react'
 import Head from "next/head";
+import type { AppProps } from "next/app";
+import { Global, css } from "@emotion/react";
 
 const Normalize = `
 body{
   margin:0;
   padding:0;
 }
-`
+`;
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-      <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
+        <title>TodoApp</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+          rel="stylesheet"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=7" />
       </Head>
-      <Global styles={css`${Normalize}`}/>
+      <Global
+        styles={css`
+          ${Normalize}
+        `}
+      />
       <Component {...pageProps} />
     </>
   );
-}
+};
 export default MyApp;
