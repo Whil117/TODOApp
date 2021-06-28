@@ -14,7 +14,7 @@ interface Todo {
   done: boolean;
 }
 interface TodoComp {
-  handleTodoTheme: any;
+  handleTodoTheme: (nameTheme: string) => void;
 }
 const TodoWarning = styled.h2`
   color: red;

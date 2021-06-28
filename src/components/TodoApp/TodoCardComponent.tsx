@@ -13,8 +13,8 @@ import ThemeContext from "../../assets/ThemeContext";
 
 interface Props {
   todo: any;
-  handleTodoCheck: Function;
-  handleTodoDelete: Function;
+  handleTodoCheck: (id: number) => void;
+  handleTodoDelete: (id: number) => void;
 }
 
 const TodoCardComponent: FC<Props> = ({

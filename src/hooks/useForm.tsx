@@ -1,30 +1,24 @@
 import { FormEvent, useState } from "react";
-
 interface FormValue {
   title: string;
   desc: string;
 }
-const initValue = {
-  title: "",
-  desc: "",
-};
+type Handle = FormEvent<HTMLInputElement | HTMLTextAreaElement>
 
-const useForm = (
-  init = initValue
-): [value: FormValue, handleChange: (evt: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void , reset: () => void] => {
+
+const useForm = (init:FormValue): [value: FormValue, handleChange: (evt:Handle) => void , reset: () => void] => {
   const [value, setValue] = useState(init);
 
   const reset = () => {
     setValue(init);
   };
 
-  const handleChange = (evt: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (evt:Handle) => {
     setValue({
       ...value,
       [evt.currentTarget.name]: evt.currentTarget.value,
-    });
-  };
+    })
+  }
   return [value, handleChange, reset];
 };
-//, , reset
 export default useForm;
